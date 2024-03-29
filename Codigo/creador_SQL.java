@@ -14,7 +14,7 @@ public class creador_SQL {
     public static void main(String[] args) throws FileNotFoundException {
         try {
             File arch = new File(
-                    "C:\\Users\\santi\\OneDrive\\Documentos\\Santiago uni\\Bases de datos\\Proyecto\\proyecto_SQL\\src\\resultado.txt");
+                    "C:\\Users\\resultado.txt");//Aqui va el directorio donde tienes guardado el archivo
             FileWriter res = new FileWriter(arch);
             Scanner in = new Scanner(System.in);
             System.out.println("Introduce el nombre del esquema");
