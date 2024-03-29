@@ -1,9 +1,10 @@
+//Codigo creado por Santiago Monreal para uso libre para quien quiera. Aun tiene unos bugs que estoy resolviendo.
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
 import java.io.IOException;
-import java.io.BufferedWriter;
 
 public class creador_SQL {
 
