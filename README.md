@@ -11,3 +11,5 @@ Introduce la primary key
 2. Nombre
 3. DNI
 (Tu respuesta) 1
+
+Si queréis editarlo añadid una pull request y describid los cambios que habéis hecho
