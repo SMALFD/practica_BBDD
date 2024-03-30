@@ -12,5 +12,3 @@ Introduce la primary key
 (Tu respuesta) 1
 
 Si queréis editarlo añadid una pull request y describid los cambios que habéis hecho
-
-Powered by ASCFI
