@@ -67,7 +67,7 @@ public class creador_SQL {
                 }
             }
             System.out.println("¿Cual es la primary key?");
-            imprimeArray(todosDatos);
+            imprimeArray(todosDatos, numerodeDatos);
             Integer primaryKey = in.nextInt();
             res.write("PRIMARY KEY (" + todosDatos[primaryKey - 1] + ")\n");
             System.out.println("¿Tiene el código Foreign Keys? y/n");
@@ -131,7 +131,7 @@ public class creador_SQL {
         System.out.println("Introduce el nombre de la key");
         String key = in.nextLine();
         System.out.println("Introduce la tabla referenciada con su numero");
-        imprimeArray(tablas);
+        imprimeArray(tablas, numTablas);
         Integer tablareferencia = in.nextInt()-1;
         System.out.println("¿Que dato referencia? Poner a mano");
         String datoExacto = in.nextLine();
@@ -159,6 +159,17 @@ public class creador_SQL {
             System.out.println(e);
         }
     }
+
+    public static void imprimeArray(String[] arr, int numerodeDatos) {
+        int n = 0;
+        while (numerodeDatos > n) {
+            int y = n + 1;
+            System.out.println(y + ". " + arr[n]);
+            n++;
+        }
+    }
+
+}
 
     public static void imprimeArray(String[] arr) {
         int n = 0;
