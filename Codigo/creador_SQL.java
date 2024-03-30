@@ -11,6 +11,7 @@ public class creador_SQL {
     static int numTablas = 0;
 
     public static void main(String[] args) throws FileNotFoundException {
+        System.out.println("Powered by ASCFI\nEste codigo fue creado por SMALFD y testeado por Seb0w, esperamos que os guste\n\n");
         try {
             File arch = new File(
                     "C:\\Users\\resultado.txt");// Aqui va el directorio donde tienes guardado el archivo
@@ -77,7 +78,7 @@ public class creador_SQL {
             if (foreign.equals("y")) {
                 boolean hayforeign = true;
                 while (hayforeign) {
-                    System.out.println("¿Quieres anadir una foreign key? y/n");
+                    System.out.println("¿Quieres anadir una Foreign Key? y/n");
                     String foreign2 = in.nextLine();
                     if (foreign2.equals("y")) {
                         anadeForeign(res, in, todosDatos, numerodeDatos);
