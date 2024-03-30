@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
-import java.io.IOException;
 
 public class creador_SQL {
 
@@ -14,7 +13,7 @@ public class creador_SQL {
     public static void main(String[] args) throws FileNotFoundException {
         try {
             File arch = new File(
-                    "C:\\Users\\resultado.txt");//Aqui va el directorio donde tienes guardado el archivo
+                    "C:\\Users\\resultado.txt");// Aqui va el directorio donde tienes guardado el archivo
             FileWriter res = new FileWriter(arch);
             Scanner in = new Scanner(System.in);
             System.out.println("Introduce el nombre del esquema");
@@ -69,17 +68,20 @@ public class creador_SQL {
             System.out.println("¿Cual es la primary key?");
             imprimeArray(todosDatos, numerodeDatos);
             Integer primaryKey = in.nextInt();
-            res.write("PRIMARY KEY (" + todosDatos[primaryKey - 1] + ")\n");
+            res.write("PRIMARY KEY (" + todosDatos[primaryKey - 1] + "),\n");
             System.out.println("¿Tiene el código Foreign Keys? y/n");
+            //Scanner in2 = new Scanner(System.in);
+            in.nextLine();
             String foreign = in.nextLine();
+            System.out.println(foreign);
             if (foreign.equals("y")) {
                 boolean hayforeign = true;
-                while(hayforeign){
+                while (hayforeign) {
                     System.out.println("¿Quieres anadir una foreign key? y/n");
                     String foreign2 = in.nextLine();
-                    if(foreign2.equals("y")){
-                        anadeForeign(res, in);
-                    } else if (foreign.equals("n")){
+                    if (foreign2.equals("y")) {
+                        anadeForeign(res, in, todosDatos, numerodeDatos);
+                    } else if (foreign2.equals("n")) {
                         hayforeign = false;
                         System.out.println("Todos los datos anadidos");
                     } else {
@@ -89,6 +91,7 @@ public class creador_SQL {
             }
             res.write(");\n\n");
             System.out.println("Tabla creada con exito");
+            //in2.close();
         } catch (java.io.IOException e) {
             System.out.println(e);
         }
@@ -127,12 +130,15 @@ public class creador_SQL {
         return dato;
     }
 
-    public static void anadeForeign (FileWriter res, Scanner in){
-        System.out.println("Introduce el nombre de la key");
-        String key = in.nextLine();
+    public static void anadeForeign(FileWriter res, Scanner in, String[] todosDatos, int numerodeDatos) {
+        System.out.println("Introduce el dato que es Foreign Key");
+        imprimeArray(todosDatos, numerodeDatos);
+        Integer key = in.nextInt() - 1;
+        in.nextLine();
         System.out.println("Introduce la tabla referenciada con su numero");
         imprimeArray(tablas, numTablas);
-        Integer tablareferencia = in.nextInt()-1;
+        Integer tablareferencia = in.nextInt() - 1;
+        in.nextLine();
         System.out.println("¿Que dato referencia? Poner a mano");
         String datoExacto = in.nextLine();
         System.out.println("Si se borra debería\n1. Restringir\n2. Actualizar");
@@ -140,18 +146,18 @@ public class creador_SQL {
         System.out.println("Si se actualiza debería\n1. Restringir\n2. Actualizar");
         String onUpdate = in.nextLine();
         try {
-            res.write("FOREIGN KEY (" + key + ")\nREFERENCES " + tablas[tablareferencia] + " (" + datoExacto + ")\n");
-            if (onDelete.equals("1") || onDelete.equals("Restringir")){
+            res.write("FOREIGN KEY (" + todosDatos[key] + ")\nREFERENCES " + tablas[tablareferencia] + " (" + datoExacto + ")\n");
+            if (onDelete.equals("1") || onDelete.equals("Restringir")) {
                 res.write("ON DELETE RESTRICT");
-            } else if (onDelete.equals("2") || onDelete.equals("Actualizar")){
+            } else if (onDelete.equals("2") || onDelete.equals("Actualizar")) {
                 res.write("ON DELETE CASCADE");
             } else {
                 System.out.println("RESULTADO INESPERADO RESETEA");
             }
-            if (onUpdate.equals("1") || onUpdate.equals("Restringir")){
-                res.write("ON UPDATE RESTRICT");
-            } else if (onUpdate.equals("2") || onUpdate.equals("Actualizar")){
-                res.write("ON UPDATE CASCADE");
+            if (onUpdate.equals("1") || onUpdate.equals("Restringir")) {
+                res.write(" ON UPDATE RESTRICT\n");
+            } else if (onUpdate.equals("2") || onUpdate.equals("Actualizar")) {
+                res.write(" ON UPDATE CASCADE\n");
             } else {
                 System.out.println("RESULTADO INESPERADO RESETEA");
             }
@@ -163,17 +169,6 @@ public class creador_SQL {
     public static void imprimeArray(String[] arr, int numerodeDatos) {
         int n = 0;
         while (numerodeDatos > n) {
-            int y = n + 1;
-            System.out.println(y + ". " + arr[n]);
-            n++;
-        }
-    }
-
-}
-
-    public static void imprimeArray(String[] arr) {
-        int n = 0;
-        while (arr.length > n) {
             int y = n + 1;
             System.out.println(y + ". " + arr[n]);
             n++;
